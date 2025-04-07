@@ -10,21 +10,23 @@ pygame.display.set_caption("Snake Game")
 
 white=(255,255,255)
 red=(255,0,0)
-green=(0,255,0)
-black=(0,0,0)
+orange_red=(255,69,0)
+green=(0,100,0)
+black=(20,20,20)
+deep_skyblue=(0,191,255)
 
 snake_block=10
 snake_speed=12
 clock=pygame.time.Clock()
 font_style=pygame.font.SysFont("arial",25)
 
-def score_display(score):
-    value=font_style.render("Score: "+str(score), True, red)
+def score_display(score, color):
+    value=font_style.render("Score: "+str(score), True, color)
     win.blit(value,[0,0])
 
 def draw_snake(snake_block, snake_list):
     for i in snake_list:
-        pygame.draw.rect(win, green, [i[0],i[1], snake_block,snake_block])
+        pygame.draw.rect(win, deep_skyblue, [i[0],i[1], snake_block,snake_block])
 
 def message(msg, color):
     mseg=font_style.render(msg,True,color)
@@ -50,7 +52,7 @@ def gameLoop():
 
             win.fill(white)
             message("You lost! Press q-Quit or c-Play again", red)
-            score_display(length_of_snake-1)
+            score_display(length_of_snake-1,red)
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -91,7 +93,7 @@ def gameLoop():
         
 
         win.fill(black)
-        pygame.draw.rect(win, red, [foodx,foody,snake_block,snake_block])
+        pygame.draw.rect(win, orange_red, [foodx,foody,snake_block,snake_block])
 
         snake_head=[x1,y1]
         snake_list.append(snake_head)
@@ -100,7 +102,7 @@ def gameLoop():
             del snake_list[0]
 
         draw_snake(snake_block,snake_list)
-        score_display(length_of_snake-1)
+        score_display(length_of_snake-1, white)
         pygame.display.update()
 
         for i in snake_list[:-1]:
